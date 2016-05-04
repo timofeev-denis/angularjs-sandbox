@@ -1,0 +1,94 @@
+<html ng-app="demoApp">
+<head>
+    <meta charset="utf-8">
+    <title>Angular.js Example</title>
+    <style>
+        li {
+            list-style: none;
+            float: left;
+            padding: 0 10px;
+        }
+    </style>
+    <script src="1.2/angular.js"></script>
+    <script src="1.2/angular-route.min.js"></script>
+    <script>
+        var demoApp = angular.module("demoApp", ['ngRoute']);
+
+        demoApp.config(['$routeProvider',
+            function ($routeProvider) {
+                $routeProvider
+                        .when('/about', {
+                            templateUrl: 'routes/about.html',
+                            controller: 'aboutCtrl'
+                        })
+                        .when('/services', {
+                            templateUrl: 'routes/services.html',
+                            controller: 'servicesCtrl'
+                        })
+                        .when('/contacts', {
+                            templateUrl: 'routes/contacts.html',
+                            controller: 'contactsCtrl'
+                        })
+                        .otherwise({
+                            redirectTo: '/'
+                        });
+            }]);
+
+        demoApp.controller("routingCtrl", function($scope, $route, $routeParams, $location) {
+            //console.log($location.$$url);
+            $scope.$route = $route;
+            $scope.$routeParams = $routeParams;
+            $scope.$location = $location;
+        });
+
+        demoApp.controller("indexCtrl", function($scope, $location) {
+            console.log($location.$$url);
+        });
+
+        demoApp.controller("aboutCtrl", function($scope, $http, $location) {
+            console.log($location.$$url);
+            $http.get( "about.json", function(response) {
+
+            }, function(error) {
+
+            });
+        });
+
+        demoApp.controller("servicesCtrl", function($scope, $http, $location) {
+            console.log($location.$$url);
+            $http.get( "services.json", function(response) {
+
+            }, function(error) {
+
+            });
+        });
+
+        demoApp.controller("contactsCtrl", function($scope, $http, $location) {
+            console.log($location.$$url);
+            $http.get( "contacts.json", function(response) {
+
+            }, function(error) {
+
+            });
+        });
+    </script>
+</head>
+<body ng-controller="routingCtrl">
+    <ul>
+        <li><a href="#">Главная</a></li>
+        <li><a href="#about">О компании</a></li>
+        <li><a href="#services">Услуги</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+    </ul>
+
+    <div ng-view></div>
+
+    <!--
+        <div ng-controller="indexCtrl" ng-if="" >{{$location.hash()}}</div>
+        <div ng-controller="aboutCtrl">{{$location.hash()}}</div>
+        <div ng-controller="servicesCtrl">{{$location.hash()}}</div>
+        <div ng-controller="contactsCtrl">{{$location.hash()}}</div>
+    -->
+
+</body>
+</html>
