@@ -1,0 +1,17 @@
+<script>
+var data = ['aaa', 'bbb', 'ccc', 'demo', 'test'];
+var criteria = {
+	shortName: 'A',
+	fullName: ''	
+};
+var filteredData = data.filter( function(value) {
+	if(value.indexOf(criteria.shortName) >= 0 || value.indexOf(criteria.fullName) >= 0) {
+		return true;
+	}
+	return false;
+});
+
+var u = "Some Text";
+var l = u.toLowerCase();
+console.log(u, "->", l);
+</script>

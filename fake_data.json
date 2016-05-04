@@ -1,0 +1,11 @@
+var data = [
+{'id': '1', 'shortName': '1Организация', 'fullName': '1 Крутая организация', 'modified': false},
+{'id': '2', 'shortName': '2Реорганизация', 'fullName': '2 Полная реорганизация', 'modified': false},
+{'id': '3', 'shortName': '3Приватизация', 'fullName': '3 Честная приватизация', 'modified': false},
+{'id': '11', 'shortName': '4Организация', 'fullName': '4 Крутая организация', 'modified': false},
+{'id': '12', 'shortName': '5Реорганизация', 'fullName': '5 Полная реорганизация', 'modified': false},
+{'id': '13', 'shortName': '6Приватизация', 'fullName': '6 Честная приватизация', 'modified': false},
+{'id': '21', 'shortName': '7Организация', 'fullName': '7 Крутая организация', 'modified': false},
+{'id': '22', 'shortName': '8Реорганизация', 'fullName': '8 Полная реорганизация', 'modified': false},
+{'id': '23', 'shortName': '9Приватизация', 'fullName': '9 Честная приватизация', 'modified': false}
+];

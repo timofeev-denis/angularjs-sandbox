@@ -1,0 +1,98 @@
+<html ng-app="demoApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Angular.js Example</title>
+	<style>
+		li {
+			list-style: none;
+			float: left;
+			padding: 0 10px;
+		}
+	</style>
+    <script src="1.2/angular.js"></script>
+    <script src="1.2/ng-table.js"></script>
+	<script>
+	var demoApp = angular.module("demoApp", ["ngTable"]);
+	demoApp.controller("MyCtrl", function($scope, ngTableParams) {
+		$scope.activeInput = {
+			id: 0
+		}
+
+		$scope.dictionaryData = [
+			{"id": "1", "name": "John Doe", "fullname": "John Garcia Doe"},
+			{"id": "2", "name": "Jane Doe", "fullname": "Jane Markez Doe"},
+			{"id": "3", "name": "Hancock", "fullname": "Hancock Rodrigez"},
+			{"id": "4", "name": "Some name", "fullname": "Some Cool name"}
+		];
+		
+		$scope.showInput = function(item) {
+			//console.log(event);
+			if($scope.activeInput.id == item.id) {
+				return true;
+			}
+			$scope.activeInput.id = item.id;
+			console.log($scope.activeInput);
+			//$scope.dictionaryData[0] = {"id": "1", "name": "John Doe", "fullname":  "Junior"};
+			$scope.tmp = {
+				id: item.id,
+				name: item.name,
+				fullname: item.fullname
+			};
+		};
+		
+		$scope.tableParams = new ngTableParams({
+			page: 1,
+			count: 3
+		}, {
+			counts: [1, 2, 3, 4],
+			total: $scope.dictionaryData.length,
+			getData: function ($defer, params) {
+				start = (params.page() - 1) * params.count();
+				end = params.page() * params.count();
+				$scope.data = $scope.dictionaryData.slice( start, end );
+				$defer.resolve($scope.data);
+			}
+		});
+
+		$scope.save = function(id) {
+			//console.log(id);
+			console.log($scope.tmp);
+			$scope.tmp = undefined;
+			$scope.activeInput.id = 0;
+		};
+
+		$scope.edit = function(item) {
+			$scope.showInput(item);
+		};
+	});
+	</script>
+  </head>
+  <body ng-controller="MyCtrl">
+	<table ng-table="tableParams" border=1 >
+
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Full Name</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="item in data">
+			<td>
+				<span>{{item.id}}</span>
+			</td>
+			<td ng-click="showInput(item)">
+				<span ng-hide="activeInput.id==item.id">{{item.name}}</span>
+				<input ng-show="activeInput.id==item.id" type="text" ng-model="tmp.name" >
+			</td>
+			<td ng-click="showInput(item)">
+				<span ng-hide="activeInput.id==item.id">{{item.fullname}}</span>
+				<input ng-show="activeInput.id==item.id" type="text" ng-model="tmp.fullname" >
+			</td>
+			<td>
+				<button ng-click="edit(item)" ng-hide="activeInput.id==item.id">edit</button>
+				<button ng-click="save(item.id)" ng-show="activeInput.id==item.id">save</button>
+			</td>
+		</tr>
+	</table>
+  </body>
+</html>
