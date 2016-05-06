@@ -1,12 +1,20 @@
 <html ng-app="demoApp">
 <head>
     <meta charset="utf-8">
-    <title>Angular.js Example</title>
+    <title>Angular.js Example | ngRouting</title>
     <style>
         li {
             list-style: none;
             float: left;
             padding: 0 10px;
+        }
+        header {
+            width: 100%;
+            clear: both;
+        }
+        .content {
+            width: 100%;
+            clear: both;
         }
     </style>
     <script src="1.2/angular.js"></script>
@@ -74,14 +82,15 @@
     </script>
 </head>
 <body ng-controller="routingCtrl">
-    <ul>
-        <li><a href="#">Главная</a></li>
-        <li><a href="#about">О компании</a></li>
-        <li><a href="#services">Услуги</a></li>
-        <li><a href="#contacts">Контакты</a></li>
-    </ul>
-
-    <div ng-view></div>
+    <header>
+        <ul>
+            <li><a href="#">Главная</a></li>
+            <li><a href="#about">О компании</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </header>
+    <div ng-view class="content"></div>
 
     <!--
         <div ng-controller="indexCtrl" ng-if="" >{{$location.hash()}}</div>

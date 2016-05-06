@@ -1,0 +1,50 @@
+<html ng-app="demoApp">
+<head>
+    <meta charset="utf-8">
+    <title>Angular.js Example | validation</title>
+    <style>
+        li {
+            list-style: none;
+            float: left;
+            padding: 0 10px;
+        }
+        header {
+            width: 100%;
+            clear: both;
+        }
+        .content {
+            width: 100%;
+            clear: both;
+        }
+    </style>
+    <script src="1.2/angular.js"></script>
+    <script>
+        var demoApp = angular.module("demoApp", []);
+
+        demoApp.controller("mainCtrl", function($scope) {
+
+            $scope.user = {};
+
+            $scope.submitForm = function(form) {
+                if(form.$valid) {
+                    console.log("Valid");
+                } else {
+                    console.log("INVALID");
+                }
+            };
+        });
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+
+<form name="complaintForm" novalidate>
+    First name: <input type="text" name="firstName" required ng-model="user.firstName"/><br>
+    Last name: <input type="text" name="lastName" required ng-model="user.lastName"/><br>
+    Email: <input type="email" name="userEmail" ng-model="user.email"/><br>
+    <button ng-click="submitForm(complaintForm)">Submit</button>
+</form>
+</body>
+
+
+</html>

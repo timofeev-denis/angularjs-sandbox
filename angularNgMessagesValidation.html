@@ -1,0 +1,57 @@
+<html ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS custom validation</title>
+
+    <script src="1.5/angular.js"></script>
+    <script src="1.5/angular-messages.js"></script>
+    <script>
+        var demoApp = angular.module("demoApp", ['ngMessages']);
+
+        demoApp.controller("mainCtrl", function($scope) {
+            $scope.user = {};
+            $scope.validation = false;
+
+            $scope.formSubmit = function() {
+                //console.log($scope);
+                console.log("Submit");
+                $scope.validation = true;
+            }
+        });
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <form name="userForm" novalidate>
+
+        <div>First name:</div>
+        <div>
+            <input type="text" name="firstName" ng-model="user.firstName" required />
+            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+            </div>
+        </div>
+
+        <div>Last name:</div>
+        <div>
+            <input type="text" name="lastName" ng-model="user.lastName" required />
+            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+            </div>
+        </div>
+
+        <div>Email:</div>
+        <div>
+            <input type="email" name="email" ng-model="user.email" required />
+            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+                <div ng-message="email">Некорректная информация</div>
+            </div>
+        </div>
+
+        <button ng-click="formSubmit()">formSubmit</button>
+
+    </form>
+
+</body>
+</html>
