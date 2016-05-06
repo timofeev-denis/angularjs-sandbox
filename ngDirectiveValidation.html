@@ -1,0 +1,78 @@
+<html ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS directive validation</title>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="1.5/angular.js"></script>
+    <script src="1.5/angular-messages.js"></script>
+
+    <script>
+        var demoApp = angular.module("demoApp", ['ngMessages']);
+
+        demoApp.controller("mainCtrl", function($scope) {
+            $scope.user = {};
+            $scope.titles = {
+                firstName: 'Динамический тултип'
+            };
+            $scope.validation = false;
+
+            $scope.formSubmit = function() {
+                //console.log($scope);
+                console.log(userForm);
+
+                $scope.validation = true;
+
+                $scope.titles.firstName = "Изменённый тултип (через директиву)";
+
+                $("#firstName").tooltip("show");
+            }
+        });
+
+        angular.module('demoApp')
+                .directive("tbTooltip", function () {
+                    return {
+                        restrict: 'A',
+                        link: function (scope, element, attrs) {
+                            attrs.$observe('title', function (value) {
+                                element.tooltip('destroy');
+                                element.tooltip({ title: value});
+                            });
+                        }
+                    };
+                });
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<form name="userForm" novalidate>
+
+    <div>First name:</div>
+    <div>
+        <input type="text" id="firstName" name="firstName" ng-model="user.firstName" tb-tooltip title="{{titles.firstName}}" required />
+    </div>
+
+    <div>Last name:</div>
+    <div>
+        <input type="text" name="lastName" ng-model="user.lastName" tb-tooltip title="Статический тултип" required />
+    </div>
+
+    <div>Email:</div>
+    <div>
+        <input type="email" name="email" ng-model="user.email" title="Стандартный тултип" required />
+    </div>
+
+    <button ng-click="formSubmit()" tb-tooltip title="{{buttonTitle}}">formSubmit</button>
+
+</form>
+
+</body>
+</html>
