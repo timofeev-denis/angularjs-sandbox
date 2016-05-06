@@ -6,7 +6,6 @@
     <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="1.5/angular.js"></script>
-    <script src="1.5/angular-messages.js"></script>
 
     <script>
         $(document).ready(function(){
@@ -15,17 +14,21 @@
     </script>
 
     <script>
-        var demoApp = angular.module("demoApp", ['ngMessages']);
+        var demoApp = angular.module("demoApp", []);
 
         demoApp.controller("mainCtrl", function($scope) {
             $scope.user = {};
             $scope.validation = false;
 
             $scope.formSubmit = function() {
-                //console.log($scope);
+                //console.log($scope.userForm);
                 console.log("Submit");
                 $scope.validation = true;
-            }
+            };
+
+            $scope.$watch('userForm.$valid', function(newValue, oldValue) {
+                console.info(oldValue, "->", newValue);
+            });
         });
 
     </script>
@@ -45,26 +48,16 @@
         <div>First name:</div>
         <div>
             <input type="text" name="firstName" ng-model="user.firstName" data-toggle="tooltip" title="Yey!!!" required />
-            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
-            </div>
         </div>
 
         <div>Last name:</div>
         <div>
             <input type="text" name="lastName" ng-model="user.lastName" required />
-            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
-            </div>
         </div>
 
         <div>Email:</div>
         <div>
-            <input type="email" name="email" ng-model="user.email" required />
-            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
-                <div ng-message="email">Некорректная информация</div>
-            </div>
+            <input type="email" name="email" ng-model="user.email"  />
         </div>
 
         <button ng-click="formSubmit()" title="Click to submit">formSubmit</button>

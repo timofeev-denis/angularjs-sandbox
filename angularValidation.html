@@ -41,7 +41,7 @@
 <form name="complaintForm" novalidate>
     First name: <input type="text" name="firstName" required ng-model="user.firstName"/><br>
     Last name: <input type="text" name="lastName" required ng-model="user.lastName"/><br>
-    Email: <input type="email" name="userEmail" ng-model="user.email"/><br>
+    Email: <input type="email" name="userEmail" required ng-model="user.email"/><br>
     <button ng-click="submitForm(complaintForm)">Submit</button>
 </form>
 </body>
