@@ -2,7 +2,9 @@
 <head>
     <meta charset="UTF-8">
     <title>AngularJS custom validation</title>
-
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
     <script src="1.5/angular.js"></script>
     <script src="1.5/angular-messages.js"></script>
     <script>
@@ -23,32 +25,36 @@
 </head>
 <body ng-controller="mainCtrl">
     <form name="userForm" novalidate>
-
-        <div>First name:</div>
-        <div>
-            <input type="text" name="firstName" ng-model="user.firstName" required />
-            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
+        <div class="form-group" ng-class="{'has-error' : userForm.firstName.$invalid && validation == true}">
+            <div class="control-label">First name:</div>
+            <div>
+                <input type="text" name="firstName" ng-model="user.firstName" required class="form-control" />
+                <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation">
+                    <div ng-message="required">Поле обязательное для заполнения</div>
+                </div>
             </div>
         </div>
 
-        <div>Last name:</div>
-        <div>
-            <input type="text" name="lastName" ng-model="user.lastName" required />
-            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
+        <div class="form-group" ng-class="{'has-error' : userForm.lastName.$invalid && validation == true}">
+            <div class="control-label">Last name:</div>
+            <div>
+                <input type="text" name="lastName" ng-model="user.lastName" required class="form-control" />
+                <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation">
+                    <div ng-message="required">Поле обязательное для заполнения</div>
+                </div>
             </div>
         </div>
 
-        <div>Email:</div>
-        <div>
-            <input type="email" name="email" ng-model="user.email" required />
-            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation">
-                <div ng-message="required">Поле обязательное для заполнения</div>
-                <div ng-message="email">Некорректная информация</div>
+        <div class="form-group" ng-class="{'has-error' : userForm.email.$invalid && validation == true}">
+            <div class="control-label">Email:</div>
+            <div>
+                <input type="email" name="email" ng-model="user.email" class="form-control" />
+                <div ng-messages="userForm.email.$error" role="alert" ng-if="validation">
+                    <div ng-message="required">Поле обязательное для заполнения</div>
+                    <div ng-message="email">Некорректная информация</div>
+                </div>
             </div>
         </div>
-
         <button ng-click="formSubmit()">formSubmit</button>
 
     </form>
