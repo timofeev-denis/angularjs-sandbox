@@ -1,0 +1,145 @@
+<html ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>AngularJS validation with custom tooltip</title>
+    <link rel="stylesheet" type="text/css" href="validation-tooltip.css">
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="1.5/angular.js"></script>
+    <script src="1.5/angular-messages.js"></script>
+    <script>
+        var demoApp = angular.module("demoApp", ['ngMessages']);
+
+        demoApp.controller("mainCtrl", function($scope, $timeout) {
+            $scope.user = {};
+            $scope.validation = false;
+            $scope.activeTooltip = "";
+
+            $scope.formSubmit = function() {
+                //console.log("Submit");
+                $scope.validation = true;
+                $timeout(function() {
+                    var x = document.getElementsByClassName("has-error");
+                    if (x.length > 0) {
+                        $scope.showTooltip(x[0].id);
+                    }
+                }, 300);
+            };
+
+            $scope.showTooltip = function (id) {
+                $(document.getElementsByClassName("has-error")).removeClass("hovered");
+                angular.element(document.getElementById(id)).addClass("hovered");
+            };
+
+            $scope.hideTooltip = function (id) {
+                angular.element(document.getElementById(id)).removeClass("hovered");
+            };
+
+            $scope.onMouseEnter = function($event) {
+                $scope.showTooltip($event.currentTarget.id);
+            };
+
+            $scope.onMouseLeave = function($event) {
+                $scope.hideTooltip($event.currentTarget.id);
+            };
+
+        });
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+<br>
+<br>
+<br>
+<br>
+<br>
+<form name="userForm" novalidate>
+    <div class="form-group validation_tooltip" ng-class="{'has-error' : userForm.firstName.$invalid && validation == true}" ng-mouseenter="onMouseEnter($event)"  ng-mouseleave="onMouseLeave($event)" id="firstNameWrapper">
+        <div class="control-label">First name:</div>
+        <div>
+            <input type="text" name="firstName" ng-model="user.firstName" required class="form-control" />
+            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation" class="tooltip_content">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group validation_tooltip" ng-class="{'has-error' : userForm.lastName.$invalid && validation == true}" ng-mouseenter="onMouseEnter($event)"  ng-mouseleave="onMouseLeave($event)" id="lastNameWrapper">
+        <div class="control-label">Last name:</div>
+        <div>
+            <input type="text" name="lastName" ng-model="user.lastName" required class="form-control" />
+            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation" class="tooltip_content" ng-class="{'hovered' : activeTooltip == 'firstNameWrapper'}">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid && validation == true}">
+        <div class="control-label">Email:</div>
+        <div>
+            <input type="email" name="email" ng-model="user.email" class="form-control" />
+            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation" class="tooltiptext">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+                <div ng-message="email">Некорректная информация</div>
+            </div>
+        </div>
+    </div>
+    <button ng-click="formSubmit()">formSubmit</button>
+</form>
+
+<!--
+<br>
+<br>
+<br>
+<br>
+<br>
+<form name="userForm2" novalidate>
+    <div id="foo" class="form-group validation_tooltip has-error">
+        <div class="control-label">First name:</div>
+        <div style="border: 5px solid darkslategrey">
+            <input type="text" required class="form-control" style="width: 200px" />
+            <div class="tooltip_content">
+                <div >Поле обязательное для заполнения-1</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group validation_tooltip has-error">
+        <div class="control-label">Last name:</div>
+        <div>
+            <input type="text" required class="form-control" />
+            <div class="tooltip_content">
+                <div >Поле обязательное для заполнения-2</div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+<div class="form-group has-error">
+    <div class="control-label">First name:</div>
+    <div class="validation_tooltip">
+        <input type="text" name="firstName2" class="form-control" />
+        <div class="tooltip_content">
+            <div >Поле обязательное для заполнения-1</div>
+        </div>
+    </div>
+</div>
+
+<div class="form-group has-error">
+    <div class="control-label">Last name:</div>
+    <div class="validation_tooltip">
+        <input type="text" name="lastName2" class="form-control" />
+        <div class="tooltip_content">
+            <div >Поле обязательное для заполнения-2</div>
+        </div>
+    </div>
+</div>
+-->
+</body>
+</html>

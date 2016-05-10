@@ -1,0 +1,36 @@
+.validation_tooltip {
+    position: relative;
+    display: inline;
+}
+.validation_tooltip .tooltip_content {
+    position: absolute;
+    width:300px;
+    color: #FFFFFF;
+    background: #D94A4A;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    visibility: hidden;
+    border-radius: 6px;
+}
+.validation_tooltip .tooltip_content:after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -8px;
+    width: 0; height: 0;
+    border-top: 8px solid #D94A4A;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+}
+.validation_tooltip:hover .tooltip_content, .validation_tooltip.hovered  .tooltip_content {
+    visibility: visible;
+    opacity: 0.8;
+
+    bottom: 50px;
+    left: 50%;
+    /*margin-left: -76px;*/
+    z-index: 999;
+
+}
