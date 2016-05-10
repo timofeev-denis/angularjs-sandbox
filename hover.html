@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hover</title>
+    <script src="jquery/jquery.min.js"></script>
+    <style>
+        p {
+            font-size: 14px;
+            line-height: 30px;;
+        }
+
+        p.hovered {
+            font-size: 22px !important;
+        }
+    </style>
+
+    <script>
+        $(function() {
+            function showTooltip(e) {
+                $(e).addClass("hovered");
+            }
+
+            function hideTooltip(e) {
+                $(e).removeClass("hovered");
+            }
+
+            function foo() {
+                showTooltip(document.getElementById("p1"));
+            }
+
+            $(".tt").mouseover(function() {
+                showTooltip(this);
+            });
+
+            $(".tt").mouseout(function() {
+                hideTooltip(this);
+            });
+
+            $("#btn_hover").click(function() {
+                foo();
+            });
+        });
+    </script>
+</head>
+<body>
+<p class="tt" id="p1">1111111111111111</p>
+<p class="tt">222222222222222222</p>
+<p class="tt">333333333333333333333</p>
+
+<button id="btn_hover">hover</button>
+</body>
+</html>
