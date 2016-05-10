@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>AngularJS custom validation</title>
     <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="tooltip.css">
     <script src="jquery/jquery.min.js"></script>
     <script src="bootstrap/bootstrap.min.js"></script>
     <script src="1.5/angular.js"></script>
@@ -24,6 +25,11 @@
     </script>
 </head>
 <body ng-controller="mainCtrl">
+<br>
+<br>
+<br>
+<br>
+<br>
     <form name="userForm" novalidate>
         <div class="form-group" ng-class="{'has-error' : userForm.firstName.$invalid && validation == true}">
             <div class="control-label">First name:</div>
@@ -45,11 +51,11 @@
             </div>
         </div>
 
-        <div class="form-group" ng-class="{'has-error' : userForm.email.$invalid && validation == true}">
+        <div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid && validation == true}">
             <div class="control-label">Email:</div>
             <div>
                 <input type="email" name="email" ng-model="user.email" class="form-control" />
-                <div ng-messages="userForm.email.$error" role="alert" ng-if="validation">
+                <div ng-messages="userForm.email.$error" role="alert" ng-if="validation" class="tooltiptext">
                     <div ng-message="required">Поле обязательное для заполнения</div>
                     <div ng-message="email">Некорректная информация</div>
                 </div>
