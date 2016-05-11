@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM with tags</title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="../bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../validation-tooltip.css">
+    <script src="../jquery/jquery.min.js"></script>
+    <script src="../bootstrap/bootstrap.min.js"></script>
+    <script src="../1.5/angular.js"></script>
+    <script src="../1.5/angular-messages.js"></script>
+
+    <script>
+        var demoApp = angular.module("demoApp", ['ngMessages']);
+
+        demoApp.controller("Controller",
+                ['$scope',
+                    function ($scope) {
+                        $scope.user = {};
+                        $scope.messages = [
+                            {type: 'email', text: 'Некорректная информация'},
+                            {type: 'required', text: 'Поле обязательное для заполнения'}
+                        ];
+                    }]);
+
+        demoApp.directive('uiValidationMessages', function () {
+            return {
+                scope: {
+                    messages: '=',
+                    form: '='
+                },
+                replace: true,
+                templateUrl: 'messages-template.html'
+            }
+        });
+        demoApp.directive('uiValidationMessage', function () {
+            return {
+                scope: {
+                    message: "="
+                },
+                replace: true,
+                require: '^^uiValidationMessages',
+                templateUrl: 'message-template.html'
+            }
+        });
+    </script>
+
+</head>
+<body ng-controller="Controller">
+
+<form name="userForm" novalidate>
+
+    <!--<div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid}">-->
+        <!--<div class="control-label">Email: {{userForm.email.$invalid}})</div>-->
+        <!--<div>-->
+            <!--<input type="email" name="email" ng-model="user.email" class="form-control" required/>-->
+            <!--<div ng-messages="userForm.email.$error" role="alert" ng-if="userForm.email.$invalid"-->
+                 <!--class="tooltip_content">-->
+                <!--<div ng-message="required">Поле обязательное для заполнения</div>-->
+                <!--<div ng-message="email">Некорректная информация</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="form-group" ng-class="{'has-error' : userForm.mail.$invalid}">
+        <div class="control-label">Email:</div>
+        <div>
+            <input type="email" name="mail" ng-model="user.mail" class="form-control" required/>
+            <ui-validation-messages form="userForm.mail" messages="[ {type: 'email', text: 'Некорректная информация'}]"/>
+        </div>
+    </div>
+
+</form>
+
+
+</body>
+</html>
