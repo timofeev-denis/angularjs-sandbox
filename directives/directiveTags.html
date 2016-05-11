@@ -53,23 +53,25 @@
 
 <form name="userForm" novalidate>
 
-    <!--<div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid}">-->
-        <!--<div class="control-label">Email: {{userForm.email.$invalid}})</div>-->
-        <!--<div>-->
-            <!--<input type="email" name="email" ng-model="user.email" class="form-control" required/>-->
-            <!--<div ng-messages="userForm.email.$error" role="alert" ng-if="userForm.email.$invalid"-->
-                 <!--class="tooltip_content">-->
-                <!--<div ng-message="required">Поле обязательное для заполнения</div>-->
-                <!--<div ng-message="email">Некорректная информация</div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+<!--
+    <div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid}">
+        <div class="control-label">Email: {{userForm.email.$invalid}})</div>
+        <div>
+            <input type="email" name="email" ng-model="user.email" class="form-control" required/>
+            <div ng-messages="userForm.email.$error" role="alert" ng-if="userForm.email.$invalid"
+                 class="tooltip_content">
+                <div ng-message="required">Поле обязательное для заполнения</div>
+                <div ng-message="email">Некорректная информация</div>
+            </div>
+        </div>
+    </div>
+-->
 
     <div class="form-group" ng-class="{'has-error' : userForm.mail.$invalid}">
         <div class="control-label">Email:</div>
         <div>
             <input type="email" name="mail" ng-model="user.mail" class="form-control" required/>
-            <ui-validation-messages form="userForm.mail" messages="[ {type: 'email', text: 'Некорректная информация'}]"/>
+            <ui-validation-messages form="userForm.mail" messages="[ {type: 'required', text: 'Заполните поле'}, {type: 'email', text: 'Некорректная информация'}]"/>
         </div>
     </div>
 
