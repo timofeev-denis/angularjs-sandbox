@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Directive</title>
+    <script src="1.5/angular.js"></script>
+    <script>
+        var demoApp = angular.module("demoApp", []);
+
+        demoApp.controller("Controller",
+                ['$scope',
+                    function ($scope) {
+                        $scope.customer = {
+                            name: 'Customer Unknown',
+                            address: '123 Elm street'
+                        };
+
+                        $scope.john = {
+                            name: 'John Doe',
+                            address: '1 Lenin street'
+                        };
+
+                        $scope.carl = {
+                            name: 'Carl Hofsteider',
+                            address: '13 Broadway'
+                        };
+
+                    }]);
+
+        demoApp.directive('myCustomer', function () {
+            return {
+                restrict: 'A',
+                scope: {
+                    customer: '=info'
+                },
+                templateUrl: function (elem, attr) {
+                    return 'customer-template.html';
+                }
+            }
+        });
+
+    </script>
+
+</head>
+<body ng-controller="Controller">
+
+    <div my-customer info="john"></div>
+    <div my-customer info="carl"></div>
+
+</body>
+</html>
