@@ -59,7 +59,7 @@
 <br>
 <form name="userForm" novalidate>
     <!-- First Name -->
-    <div class="form-group validation_tooltip" id="firstNameWrapper"
+    <div class="form-group validation-tooltip" id="firstNameWrapper"
          ng-class="{'has-error' : userForm.firstName.$invalid && validation == true}"
          ng-mouseenter="onMouseEnter($event)"
          ng-mouseleave="onMouseLeave($event)">
@@ -68,14 +68,14 @@
 
         <div>
             <input type="text" name="firstName" ng-model="user.firstName" required class="form-control" />
-            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation" class="tooltip_content">
+            <div ng-messages="userForm.firstName.$error" role="alert" ng-if="validation" class="tooltip-content">
                 <div ng-message="required">Поле обязательное для заполнения</div>
             </div>
         </div>
 
     </div>
     <!-- Last Name -->
-    <div class="form-group validation_tooltip" id="lastNameWrapper"
+    <div class="form-group validation-tooltip" id="lastNameWrapper"
          ng-class="lastNameNgClass()"
          ng-mouseenter="onMouseEnter($event)"
          ng-mouseleave="onMouseLeave($event)">
@@ -84,14 +84,14 @@
 
         <div>
             <input type="text" name="lastName" ng-model="user.lastName" required class="form-control" />
-            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation" class="tooltip_content">
+            <div ng-messages="userForm.lastName.$error" role="alert" ng-if="validation" class="tooltip-content">
                 <div ng-message="required">Поле обязательное для заполнения</div>
             </div>
         </div>
 
     </div>
     <!-- Email -->
-    <div class="form-group validation_tooltip" id="emailWrapper"
+    <div class="form-group validation-tooltip" id="emailWrapper"
          ng-class="{'has-error' : userForm.email.$invalid && validation == true}"
          ng-mouseenter="onMouseEnter($event)"
          ng-mouseleave="onMouseLeave($event)">
@@ -100,7 +100,7 @@
 
         <div>
             <input type="email" name="email" ng-model="user.email" class="form-control" />
-            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation && userForm.email.$invalid" class="tooltip_content">
+            <div ng-messages="userForm.email.$error" role="alert" ng-if="validation && userForm.email.$invalid" class="tooltip-content">
                 <div ng-message="required">Поле обязательное для заполнения</div>
                 <div ng-message="email">Некорректная информация</div>
             </div>
@@ -119,21 +119,21 @@
 <br>
 <br>
 <form name="userForm2" novalidate>
-    <div id="foo" class="form-group validation_tooltip has-error">
+    <div id="foo" class="form-group validation-tooltip has-error">
         <div class="control-label">First name:</div>
         <div style="border: 5px solid darkslategrey">
             <input type="text" required class="form-control" style="width: 200px" />
-            <div class="tooltip_content">
+            <div class="tooltip-content">
                 <div >Поле обязательное для заполнения-1</div>
             </div>
         </div>
     </div>
 
-    <div class="form-group validation_tooltip has-error">
+    <div class="form-group validation-tooltip has-error">
         <div class="control-label">Last name:</div>
         <div>
             <input type="text" required class="form-control" />
-            <div class="tooltip_content">
+            <div class="tooltip-content">
                 <div >Поле обязательное для заполнения-2</div>
             </div>
         </div>
@@ -148,9 +148,9 @@
 
 <div class="form-group has-error">
     <div class="control-label">First name:</div>
-    <div class="validation_tooltip">
+    <div class="validation-tooltip">
         <input type="text" name="firstName2" class="form-control" />
-        <div class="tooltip_content">
+        <div class="tooltip-content">
             <div >Поле обязательное для заполнения-1</div>
         </div>
     </div>
@@ -158,9 +158,9 @@
 
 <div class="form-group has-error">
     <div class="control-label">Last name:</div>
-    <div class="validation_tooltip">
+    <div class="validation-tooltip">
         <input type="text" name="lastName2" class="form-control" />
-        <div class="tooltip_content">
+        <div class="tooltip-content">
             <div >Поле обязательное для заполнения-2</div>
         </div>
     </div>
