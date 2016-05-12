@@ -17,23 +17,63 @@
         var demoApp = angular.module("demoApp", ['ngMessages']);
 
         demoApp.controller("Controller",
-                ['$scope',
-                    function ($scope) {
+                ['$scope', '$timeout',
+                    function ($scope, $timeout) {
+//                        console.log($scope);
                         $scope.user = {};
+                        $scope.validation = false;
                         $scope.messages = [
                             {type: 'email', text: 'Некорректная информация'},
                             {type: 'required', text: 'Поле обязательное для заполнения'}
                         ];
-                    }]);
 
-        demoApp.directive('uiValidationMessages', function () {
+                        $scope.showTooltip = function (id) {
+                            $(document.getElementsByClassName("has-error")).removeClass("hovered");
+                            angular.element(document.getElementById(id)).addClass("hovered");
+                        };
+
+                        $scope.formSubmit = function() {
+                            $scope.validation = true;
+                            $timeout(function() {
+                                var x = document.getElementsByClassName("has-error");
+                                if (x.length > 0) {
+                                    $scope.showTooltip(x[0].id);
+                                }
+                            }, 300);
+                        };
+
+                    }
+                ]);
+
+        demoApp.directive('uiValidationMessages', function ($compile) {
+            //console.log();
             return {
+
                 scope: {
                     messages: '=',
-                    form: '='
+                    form: '=',
+                    validation: '='
                 },
+
+//                scope: true,
                 replace: true,
-                templateUrl: 'messages-template.html'
+                templateUrl: 'messages-template.html',
+                link: function($scope, $element, $attrs) {
+                    wrapper = angular.element(document.getElementById($attrs.wrapperId));
+                    wrapper.attr("ng-mouseleave", "onMouseLeave($event)");
+                    wrapper.attr("ng-mouseenter", "onMouseEnter($event)");
+
+                    $scope.onMouseLeave = function($event) {
+                        angular.element(document.getElementById($event.currentTarget.id)).removeClass("hovered");
+                    };
+
+                    $scope.onMouseEnter = function($event) {
+                        $(document.getElementsByClassName("validation_tooltip")).removeClass("hovered");
+                        angular.element(document.getElementById($event.currentTarget.id)).addClass("hovered");
+                    };
+
+                    $compile(wrapper)($scope);
+                }
             }
         });
         demoApp.directive('uiValidationMessage', function () {
@@ -50,15 +90,18 @@
 
 </head>
 <body ng-controller="Controller">
-
+<br><br><br><br><br>
 <form name="userForm" novalidate>
-
 <!--
-    <div class="form-group validation-tooltip" ng-class="{'has-error' : userForm.email.$invalid}">
+    <div class="form-group validation_tooltip"
+         id="firstNameWrapper"
+         ng-class="{'has-error' : userForm.email.$invalid && validation}"
+         ng-mouseenter="onMouseEnter($event)"
+         ng-mouseleave="onMouseLeave($event)">
         <div class="control-label">Email: {{userForm.email.$invalid}})</div>
         <div>
             <input type="email" name="email" ng-model="user.email" class="form-control" required/>
-            <div ng-messages="userForm.email.$error" role="alert" ng-if="userForm.email.$invalid"
+            <div ng-messages="userForm.email.$error" role="alert" ng-show="userForm.email.$invalid && validation"
                  class="tooltip_content">
                 <div ng-message="required">Поле обязательное для заполнения</div>
                 <div ng-message="email">Некорректная информация</div>
@@ -67,13 +110,27 @@
     </div>
 -->
 
-    <div class="form-group" ng-class="{'has-error' : userForm.mail.$invalid}">
+    <div class="form-group validation_tooltip"
+         id="mailWrapper"
+         ng-class="{'has-error' : userForm.mail.$invalid && validation}">
         <div class="control-label">Email:</div>
         <div>
             <input type="email" name="mail" ng-model="user.mail" class="form-control" required/>
-            <ui-validation-messages form="userForm.mail" messages="[ {type: 'required', text: 'Заполните поле'}, {type: 'email', text: 'Некорректная информация'}]"/>
         </div>
+        <ui-validation-messages form="userForm.mail" messages="messages" validation="validation" wrapper-id="mailWrapper"/>
     </div>
+
+    <div class="form-group validation_tooltip"
+         id="nameWrapper"
+         ng-class="{'has-error' : userForm.name.$invalid && validation}">
+        <div class="control-label">Name:</div>
+        <div>
+            <input type="text" name="name" ng-model="user.name" class="form-control" required/>
+        </div>
+        <ui-validation-messages form="userForm.name" messages="messages" validation="validation" wrapper-id="nameWrapper"/>
+    </div>
+
+    <button ng-click="formSubmit()">formSubmit</button>
 
 </form>
 

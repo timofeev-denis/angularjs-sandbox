@@ -1,4 +1,3 @@
-<div ng-messages="form.$error" role="alert" ng-show="form.$invalid" class="tooltip_content">
-    {{form.$error}}
+<div ng-messages="form.$error" role="alert" class="tooltip_content" ng-show="validation">
     <ui-validation-message message="message" ng-repeat="message in messages"/>
 </div>
