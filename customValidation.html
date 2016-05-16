@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demoApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom AngularJS validation</title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="validation-tooltip.css">
+    <script src="jquery/jquery.min.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="1.5/angular.js"></script>
+    <script src="1.5/angular-messages.js"></script>
+    <script src="custom-validation.js"></script>
+
+</head>
+<body ng-controller="Controller">
+<br><br><br><br><br>
+<form name="userForm" novalidate>
+    <div class="validation_tooltip" id="lastNameWrapper">
+        <div class="control-label">Last Name:</div>
+        <div>
+            <input type="text" name="lastName" ng-model="user.lastName" class="form-control" required valid-cyrilic/>
+        </div>
+        <div ng-messages="userForm.lastName.$error" role="alert">
+            <div ng-message="required">Обязательное поле</div>
+            <div ng-message="validCyrilic">Говорите по-русски</div>
+        </div>
+<!--
+        <ui-validation-messages form="userForm.mail" messages="messages" validation="validation" wrapper-id="mailWrapper"/>
+-->
+    </div>
+
+    <button ng-click="formSubmit()">formSubmit</button>
+
+</form>
+
+
+</body>
+</html>
