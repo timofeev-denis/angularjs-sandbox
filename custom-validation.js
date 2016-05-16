@@ -76,9 +76,21 @@ demoApp.directive('uiValidationMessage', function () {
 demoApp.directive('validCyrilic', function () {
     return {
         require: 'ngModel',
-        link: function (scope, elem, attr, ngModel) {
-            ngModel.$parsers.unshift(function (value) {
-                ngModel.$setValidity('validCyrilic', /[_А-ЯЁа-яё]/.test(value));
+        link: function (scope, elem, attr, controller) {
+            controller.$parsers.unshift(function (value) {
+                controller.$setValidity('validCyrilic', /^[А-ЯЁа-яё]+$/.test(value));
+                return value;
+            });
+        }
+    }
+});
+
+demoApp.directive('validInn', function () {
+    return {
+        require: 'ngModel',
+        link: function (scope, elem, attr, controller) {
+            controller.$parsers.unshift(function (value) {
+                controller.$setValidity('validInn', /^[0-9]{10}$/.test(value));
                 return value;
             });
         }

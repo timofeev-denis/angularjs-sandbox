@@ -21,11 +21,20 @@
     <div class="validation_tooltip" id="lastNameWrapper">
         <div class="control-label">Last Name:</div>
         <div>
-            <input type="text" name="lastName" ng-model="user.lastName" class="form-control" required valid-cyrilic/>
+            <input type="text" name="lastName" ng-model="user.lastName" class="form-control" required valid-cyrilic valid-inn/>
         </div>
         <div ng-messages="userForm.lastName.$error" role="alert">
             <div ng-message="required">Обязательное поле</div>
             <div ng-message="validCyrilic">Говорите по-русски</div>
+            <div ng-message="validInn">Это не ИНН</div>
+        </div>
+        <div class="control-label">INN:</div>
+        <div>
+            <input type="text" name="inn" ng-model="user.inn" class="form-control" required valid-inn/>
+        </div>
+        <div ng-messages="userForm.inn.$error" role="alert">
+            <div ng-message="required">Обязательное поле</div>
+            <div ng-message="validInn">Это не ИНН</div>
         </div>
 <!--
         <ui-validation-messages form="userForm.mail" messages="messages" validation="validation" wrapper-id="mailWrapper"/>
