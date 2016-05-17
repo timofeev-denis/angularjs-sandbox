@@ -18,40 +18,10 @@
 <body>
 <br><br><br><br><br>
 <form name="userForm" ng-controller="Controller as ctrl" novalidate>
-
-<!--
-    <div class="form-group validation_tooltip" id="mailWrapper">
-        <div class="control-label">Email:</div>
-        <div>
-            <input type="email" name="mail" ng-model="user.mail" class="form-control" required/>
-        </div>
-        <ui-validation-messages form="userForm.mail" messages="messages" validation="validation" wrapper-id="mailWrapper"/>
-    </div>
--->
-
     <div class="form-group validation_tooltip" id="nameWrapper">
-        <!--<div class="control-label">Name:</div>-->
-            <!--<input type="text" name="name" ng-model="user.name" class="form-control" required-->
-                   <!--validate-required="Custom message (required)"-->
-                   <!--validate-cyrilic="Custom message (cyrilic)">-->
-        <!--</div>-->
-
-        <!--<dvi ng-messages="myVar">-->
-            <!--<div ng-message="invalidName">Name is invalid</div>-->
-        <!--</dvi>-->
         <div class="control-label">Name:</div>
             <input type="text" name="name" ng-model="ctrl.user.name" class="form-control" madi-validator="messages" required>
         </div>
-<!--
-    <dvi ng-messages="userForm.name.$error">
-        <div ng-message="required">Default message required</div>
-        <div ng-message="validateRequired">Default message validateRequired</div>
-        <div ng-message="validateCyrilic">Default message validateCyrilic</div>
-    </dvi>
--->
-<!--
-        <ui-validation-messages form="userForm.name" messages="messages" validation="validation" wrapper-id="nameWrapper"/>
--->
     </div>
 
     <button ng-click="formSubmit()">formSubmit</button>
