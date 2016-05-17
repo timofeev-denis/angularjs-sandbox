@@ -37,13 +37,12 @@ demoApp.directive('madiValidator', function ($compile) {
 
             var validators = {
                 required: requiredValidator,
-                cyrilic: function (modelValue, viewValue) {
-                    return /^[А-ЯЁа-яё]+$/.test(modelValue);
-                }
+                cyrilic: cyrilicValidator
             };
 
             angular.forEach(scope.errors, function (error) {
-                if (validator = validators[error.code]) {
+                var validator = validators[error.code];
+                if (validator) {
                     modelCtrl.$validators[error.code] = validator;
                 }
             });
@@ -55,24 +54,12 @@ demoApp.directive('madiValidator', function ($compile) {
             function requiredValidator(modelValue, viewValue) {
                 return modelValue != undefined && modelValue != "";
             }
+            function cyrilicValidator(modelValue, viewValue) {
+                return /^[А-ЯЁа-яё]+$/.test(modelValue);
+            }
         }
     }
 });
 
-demoApp.directive('validateRequired', function () {
-    return {
-        require: 'ngModel',
-        scope: true,
-        link: function (scope, elem, attr, controller) {
-            controller.$validators.validateRequired = function (modelValue, viewValue) {
-                return modelValue != undefined && modelValue != "";
-            };
-        }
-        ,
-        template: '<div ng-messages="elem.$error">' +
-        '   <div ng-message="validateRequired">Message from directive</div>' +
-        '</div>'
-    }
-});
 
 
