@@ -6,7 +6,7 @@ demoApp.controller("Controller",
             $scope.user = {};
             $scope.validation = false;
             $scope.messages = [
-                {type: 'email', text: 'Некорректная информация'},
+                //{type: 'email', text: 'Некорректная информация'},
                 {type: 'required', text: 'Поле обязательное для заполнения'}
             ];
 

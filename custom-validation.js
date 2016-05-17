@@ -18,7 +18,7 @@ demoApp.controller("Controller",
             $scope.formSubmit = function () {
                 //console.log(userForm.lastName.$error);
                 //console.log(userForm.lastName.$error);
-                console.log(/[_А-ЯЁа-яё]/.test($scope.user.lastName));
+                //console.log(/[_А-ЯЁа-яё]/.test($scope.user.lastName));
 
                 /*
                 $scope.validation = true;
@@ -76,7 +76,11 @@ demoApp.directive('uiValidationMessage', function () {
 demoApp.directive('validCyrilic', function () {
     return {
         require: 'ngModel',
+        scope: true,
         link: function (scope, elem, attr, controller) {
+
+            console.log("scope: ", scope.messages);
+
             controller.$parsers.unshift(function (value) {
                 controller.$setValidity('validCyrilic', /^[А-ЯЁа-яё]+$/.test(value));
                 return value;

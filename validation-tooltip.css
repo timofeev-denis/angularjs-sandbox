@@ -1,6 +1,5 @@
 .validation-tooltip {
     position: relative;
-    display: inline;
 }
 .validation-tooltip .tooltip-content {
     position: absolute;
@@ -17,7 +16,7 @@
     content: '';
     position: absolute;
     top: 100%;
-    left: 50%;
+    left: 20%;
     margin-left: -8px;
     width: 0; height: 0;
     border-top: 8px solid #D94A4A;
@@ -29,7 +28,7 @@
     opacity: 0.8;
 
     bottom: 50px;
-    left: 50%;
+    left: 40%;
     /*margin-left: -76px;*/
     z-index: 999;
 

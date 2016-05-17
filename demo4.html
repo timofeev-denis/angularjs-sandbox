@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="demoApp">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>Demo4</title>
+    <script src="1.5/angular.js"></script>
+    <script src="1.5/angular-messages.js"></script>
+    <script>
+        var demoApp = angular.module('demoApp', ['ngMessages']);
+        demoApp.controller('mainCtrl', function($scope) {
+//            console.log($scope);
+            $scope.user = {
+                name: 'Vasya'
+            };
 
+            $scope.dbg = function () {
+                $scope.v = true;
+                console.log(userForm.email);
+            };
+
+            $scope.isVisible = function () {
+                return $scope.v;
+            }
+        });
+
+    </script>
+</head>
+<body ng-controller="mainCtrl">
+    <form name="userForm" novalidate>
+        <input type="text" name="name" ng-model="user.name" required/>
+        <input type="email" name="email" ng-model="user.email" required/>
+
+        <button ng-click="dbg()">Click</button>
+    </form>
+
+    <div ng-show="isVisible()">Here we are!</div>
 </body>
 </html>
